@@ -1,0 +1,29 @@
+CREATE TABLE usuario (
+    login VARCHAR(50) PRIMARY KEY,
+    senha VARCHAR(50) NOT NULL
+);
+
+CREATE TABLE dono (
+    cpf VARCHAR(14) PRIMARY KEY,
+    nome VARCHAR(100) NOT NULL,
+    endereco VARCHAR(200) NOT NULL,
+    telefone VARCHAR(20) NOT NULL
+);
+
+CREATE TABLE pets (
+    id SERIAL PRIMARY KEY,
+    nome VARCHAR(100) NOT NULL,
+    raca VARCHAR(50) NOT NULL,
+    idade INTEGER NOT NULL,
+    cpf_dono VARCHAR(14) NOT NULL,
+    FOREIGN KEY (cpf_dono) REFERENCES dono(cpf)
+);
+
+CREATE TABLE consulta (
+    ficha_consulta SERIAL PRIMARY KEY,
+    data VARCHAR(10) NOT NULL,
+    hora VARCHAR(10) NOT NULL,
+    principal_sintoma VARCHAR(200) NOT NULL,
+    id_pet INTEGER NOT NULL,
+    FOREIGN KEY (id_pet) REFERENCES pets(id)
+);
